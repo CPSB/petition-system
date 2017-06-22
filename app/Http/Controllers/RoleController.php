@@ -97,7 +97,7 @@ class RoleController extends Controller
     {
         try {
             $role = Role::findOrFail($roleId);
-            $role->syncPermissions([]);
+            $role->syncPermissions([]); // Empty relation for clearing the permissions relation.
             $role->delete();
 
             flash('We have deleted the permission group');
