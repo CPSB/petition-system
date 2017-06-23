@@ -11,7 +11,6 @@
 |
 */
 
-Auth::routes();
 Route::get('auth/{provider}', 'Auth\SocialAuthencation@redirectToProvider')->name('social');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthencation@handleProviderCallback')->name('social.callback');
 
