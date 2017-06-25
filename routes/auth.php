@@ -11,19 +11,17 @@
 |
 */
 
-Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-// GET	    login	                    login	            App\Http\Controllers\Auth\LoginController@showLoginForm	                    web, guest
-// POST	    login		                                    App\Http\Controllers\Auth\LoginController@login	                            web, guest
-// POST	    logout	                    logout	            App\Http\Controllers\Auth\LoginController@logout	                        web
-// GET	    register	                register	        App\Http\Controllers\Auth\RegisterController@showRegistrationForm	        web, guest
-// POST	    register		                                App\Http\Controllers\Auth\RegisterController@register	web, guest
-// GET	    password/reset	            password.request	App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm	    web, guest
-// POST	    password/email	            password.email	    App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail	    web, guest
-// GET	    password/reset/{token}	    password.reset	    App\Http\Controllers\Auth\ResetPasswordController@showResetForm	            web, guest
-// POST	    password/reset		                            App\Http\Controllers\Auth\ResetPasswordController@reset	                    web, guest
-// GET	    auth/{provider}	            social	            App\Http\Controllers\Auth\SocialAuthencation@redirectToProvider	            web
-// GET	    auth/{provider}/callback	social.callback	    App\Http\Controllers\Auth\SocialAuthencation@handleProviderCallback	        web
+Route::get('register', 'Auth\RegisterController|showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+Route::get('password/reset', 'Auth\ForgetPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgetPasswordController@sendResetLPinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('auth/{provider}', 'Auth\SocialAuthencation@redirectToProvider')->name('social');
 Route::get('auth/{provider}/callback', 'Auth\SocialAuthencation@handleProviderCallback')->name('social.callback');
