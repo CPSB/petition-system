@@ -101,12 +101,14 @@
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    @lang('auth.login-by'):
+                                                    @if (config('auth.routes.social'))
+                                                        @lang('auth.login-by'):
                                                         <div class="social-buttons">
                                                             <a href="{{ url('auth/facebook') }}" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                                                             <a href="{{ url('auth/twitter') }}" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                                         </div>
-                                                    @lang('auth.social-or')
+                                                        @lang('auth.social-or')
+                                                    @endif
                                                         <form class="form" role="form" method="post" action="{{ url('/login') }}" accept-charset="UTF-8" id="login-nav">
                                                             {{ csrf_field() }} {{-- CSRF form protection --}}
 
