@@ -38,6 +38,8 @@ class PetitionsController extends Controller
     }
 
     /**
+     * Search for petitions.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function search()
@@ -46,6 +48,8 @@ class PetitionsController extends Controller
     }
 
     /**
+     * Create view for a petition.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -55,6 +59,8 @@ class PetitionsController extends Controller
 
 
     /**
+     * Store a new petition in the system.
+     *
      * @param  PetitionValidator $input
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -80,10 +86,12 @@ class PetitionsController extends Controller
                 $this->petitions->find($petition->id)->categories()->attach($insert->id);
             }
         }
-        return redirect()->route('petition.show', $petition);
+        return redirect()->route('petitions.show', $petition);
     }
 
     /**
+     * Show a specific petition.
+     *
      * @param   integer $id The petition in the database.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
@@ -92,8 +100,24 @@ class PetitionsController extends Controller
         try {
             $petition = $this->petitions->findorFail($id);
 
-            return view('petition.show', compact('petition'));
+            return view('petitions.show', compact('petition'));
         } catch (ModelNotFoundException $modelNotFoundException) {
+            return back(302);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $petition = $this->petitions->findOrFail($id);
+
+            if ($petition->delete()) {
+                flash('De petitie is verwijderd');
+            }
+
+            return redirect()->route('petitions.index');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            dd('meh');
             return back(302);
         }
     }

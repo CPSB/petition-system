@@ -27,4 +27,14 @@ class Petitions extends Model
     {
         return $this->belongsToMany(Categories::class)->withTimestamps();
     }
+
+    /**
+     * Author data relation.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

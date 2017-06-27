@@ -16,13 +16,13 @@
                             <div style="margin-left: -15px;" class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h4><strong><a href="#">{{ $petition->title }}</a></strong></h4>
+                                        <h4><strong><a href="{{ route('petitions.show', $petition) }}">{{ $petition->title }}</a></strong></h4>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <a href="#" class="thumbnail">
+                                        <a href="{{ route('petitions.show', $petition) }}" class="thumbnail">
                                             <img src="{{ asset($petition->image_path) }}" alt="{{ $petition->title }}">
                                         </a>
                                     </div>
@@ -30,7 +30,7 @@
                                     <div class="col-md-9">
                                         <p>{{ strip_tags($petition->text) }}</p>
                                         <p>
-                                            <a class="btn btn-sm btn-info" href="">
+                                            <a class="btn btn-sm btn-info" href="{{ route('petitions.show', $petition) }}">
                                                 <span class="fa fa-chevron-right" aria-hidden="true"></span> Lees meer
                                             </a>
                                         </p>
@@ -42,11 +42,18 @@
                                         <p></p>
 
                                         <p>
-                                            <i class="fa fa-user" aria-hidden="true"></i> Autheur: <a href="#">Jhon doe</a>
+                                            <i class="fa fa-user" aria-hidden="true"></i> Autheur: {{ $petition->author->name }}
                                             | <i class="fa fa-calendar" aria-hidden="true"></i> {{ $petition->created_at->format('d/m/Y') }}
                                             | <i class="fa fa-pencil" aria-hidden="true"></i> <a href="#">0 handtekeningen</a>
                                             | <i class="fa fa-tags" aria-hidden="true"></i> Tags:
-                                            <span class="label label-primary">Geen</span>
+
+                                            @if ($petition->categories()->count() > 0)
+                                                @foreach($petition->categories as $category)
+                                                    <span class="label label-danger">{{ $category->name }}</span>
+                                                @endforeach
+                                            @else
+                                                <span class="label label-primary">Geen</span>
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
