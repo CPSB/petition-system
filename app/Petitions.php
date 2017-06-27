@@ -16,7 +16,7 @@ class Petitions extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'text', 'author_id', 'total_signatures'];
+    protected $fillable = ['title', 'image_path', 'text', 'author_id', 'total_signatures'];
 
     /**
      * Petition categories data relation.

@@ -7,6 +7,8 @@ use ActivismeBE\Http\Requests\PetitionValidator;
 use ActivismeBE\Petitions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 /**
  * Class PetitionsController
@@ -59,8 +61,18 @@ class PetitionsController extends Controller
     public function store(PetitionValidator $input)
     {
         $categories = explode(',', $input->categories); // Break up the text into an array
-        $input->merge(['author_id' => auth()->user()->id]);
 
+        // START Image upload
+        $file  = $input->file('image');
+        $path  = 'img/petitions/' .  time() . '.' . $file->getClientOriginalExtension();
+        $image = Image::make($file);
+
+        $image->fit(250, 250, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($path)
+        ;
+        $input->merge(['author_id' => auth()->user()->id, 'image_path' => $path]);
+        // END Image upload
 
         if ($petition = $this->petitions->create($input->except(['_token', 'categories']))) {
             foreach ($categories as $category) {

@@ -184,6 +184,7 @@ return [
         // ActivismeBE\Providers\BroadcastServiceProvider::class,
         ActivismeBE\Providers\EventServiceProvider::class,
         ActivismeBE\Providers\RouteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -241,6 +242,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

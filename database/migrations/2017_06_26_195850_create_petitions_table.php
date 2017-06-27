@@ -17,12 +17,23 @@ class CreatePetitionsTable extends Migration
             Schema::create('petitions', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('author_id');
+                $table->text('image_path');
                 $table->string('title');
                 $table->string('total_signatures');
                 $table->text('text');
                 $table->timestamps();
             });
-        }    }
+        }
+
+        if (! Schema::hasTable('categories_petitions')) {
+            Schema::create('categories_petitions', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('categories_id');
+                $table->integer('petitions_id');
+                $table->timestamps();
+            });
+        }
+    }
 
     /**
      * Reverse the migrations.
@@ -32,5 +43,6 @@ class CreatePetitionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('petitions');
+        Schema::dropIfexists('categories_petitions');
     }
 }

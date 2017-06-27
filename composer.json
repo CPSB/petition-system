@@ -10,6 +10,7 @@
         "cybercog/laravel-ban": "^2.1",
         "doctrine/dbal": "^2.5",
         "garygreen/pretty-routes": "^0.0.8",
+        "intervention/image": "^2.3",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",

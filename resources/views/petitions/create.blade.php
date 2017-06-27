@@ -32,7 +32,7 @@
 
                             <div class="col-md-10">
                                 <input type="file" name="image" class="form-control">
-                            </div>"f
+                            </div>
                         </div>
 
                         <div class="form-group">
