@@ -44,3 +44,11 @@ Route::group(['middleware' => ['auth']], function() {
  *
  * Below you can fill in your application routes.
  */
+
+Route::get('helpdesk/user', 'HelpDeskController@getUser')->name('helpdesk.user');
+Route::resource('helpdesk', 'HelpDeskController');
+
+Route::resource('petitions', 'PetitionsController');
+
+Route::get('comments/store', 'CommentsController@store')->name('comments.store');
+Route::get('comments/delete/{questionId}', 'CommentsController@destroy')->name('comments.delete');

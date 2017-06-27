@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace ActivismeBE\Http\Middleware;
 
 use Closure;
 Use Illuminate\Support\Facades\Request;

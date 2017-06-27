@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console;
+namespace ActivismeBE\Console;
 
-use App\Console\Commands\AuthPermissionCommand;
+use ActivismeBE\Console\Commands\AuthPermissionCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ActivismeBE\Http\Controllers;
 
-use App\Contact;
-use App\User;
-use App\Notifications\ContactMessage;
-use App\Http\Requests\ContactValidator;
+use ActivismeBE\Contact;
+use ActivismeBE\User;
+use ActivismeBE\Notifications\ContactMessage;
+use ActivismeBE\Http\Requests\ContactValidator;
 use Illuminate\Http\Request;
 
 /**
@@ -50,7 +50,7 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ContactValidator  $input
+     * @param  \ActivismeBE\Http\Requests\ContactValidator  $input
      * @return \Illuminate\Http\Response
      */
     public function store(ContactValidator $input)

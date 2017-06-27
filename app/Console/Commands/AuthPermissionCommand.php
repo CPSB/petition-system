@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace ActivismeBE\Console\Commands;
 
-use App\Role;
-use App\Permission;
+use ActivismeBE\Role;
+use ActivismeBE\Permission;
 use Illuminate\Console\Command;
 
 /**

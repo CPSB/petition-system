@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace ActivismeBE;
 
 use Cog\Ban\Contracts\HasBans as HasBansContract;
 use Cog\Ban\Traits\HasBans;

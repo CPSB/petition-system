@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Traits; 
+namespace ActivismeBE\Traits; 
 
 trait Authorizable 
 {

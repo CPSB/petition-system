@@ -1,8 +1,8 @@
 <?php
 
-use App\User;
-use App\Permission;
-use App\Role;
+use ActivismeBE\User;
+use ActivismeBE\Permission;
+use ActivismeBE\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,15 +35,15 @@ class DatabaseSeeder extends Seeder
             // Ask for roles from input
             $input_roles = $this->command->ask('Enter roles in comma separate format.', 'Admin,User');
 
-            // Explode roles 
+            // Explode roles
             $roles_array = explode(',', $input_roles);
 
-            // Add roles 
+            // Add roles
             foreach ($roles_array as $role) {
                 $role = Role::firstOrCreate(['name' => trim($role)]);
 
                 if ($role->name == 'Admin') {
-                    // Assign all permissions 
+                    // Assign all permissions
                     $role->syncPermissions(Permission::all());
                     $this->command->info('Admin granted all the permissions');
                 } else {
@@ -51,15 +51,17 @@ class DatabaseSeeder extends Seeder
                     $role->syncPermissions(Permission::where('name', 'LIKE', 'view_%')->get());
                 }
 
-                // create one user for each role 
+                // create one user for each role
                 $this->createUser($role);
             }
 
             $this->command->info('Roles ' . $input_roles . ' added successfully.');
         } else {
-            Role::firstOrCreate(['name' => 'User']); 
+            Role::firstOrCreate(['name' => 'User']);
             $this->command->info('Added only default user role.');
         }
+
+        $this->call(QuestionCategorySeeder::class);
     }
 
     /**

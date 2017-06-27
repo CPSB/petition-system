@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ActivismeBE\Http\Controllers;
 
-use App\Role;
-use App\Permission;
-use App\Traits\Authorizable;
+use ActivismeBE\Role;
+use ActivismeBE\Permission;
+use ActivismeBE\Traits\Authorizable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 

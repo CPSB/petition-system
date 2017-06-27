@@ -13,6 +13,7 @@
         {{-- Styles --}}
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css" rel="stylesheet">
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.css" rel="stylesheet">
     </head>
     <body>
         <div id="app">
@@ -62,13 +63,19 @@
                                         </ul>
                                     </li>
                                 @endif
-                            @endif
 
-                            <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
-                                <a href="{{ route('disclaimer.index') }}">
-                                    <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
-                                </a>
-                            </li>
+                                <li>
+                                    <a href="{{ route('helpdesk.index') }}">
+                                        <span class="fa fa-question-circle" aria-hidden="true"></span> Helpdesk
+                                    </a>
+                                </li>
+                            @else
+                                <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
+                                    <a href="{{ route('disclaimer.index') }}">
+                                        <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer
+                                    </a>
+                                </li>
+                            @endif
 
                             <li class="{{ Request::is('contact*') ? 'active' : '' }} {{ Request::is('backend/contact*') ? 'active' : '' }}">
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
@@ -137,6 +144,22 @@
                                         </ul>
                                     </li>
                             @else
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <span class="fa fa-plus" aria-hidden="true"></span>
+                                        <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ route('petitions.create') }}">Nieuwe petitie</a></li>
+                                        <li><a href="">Nieuwe organisatie</a></li>
+
+                                        @if (! auth()->user()->hasRole('Admin'))
+                                            <li><a href="">Nieuw helpdesk ticket</a></li>
+                                        @endif
+                                    </ul>
+                                </li>
+
                                 <li class="{{ Request::is('notifications*') ? 'active' : '' }}">
                                     <a href="{{ route('notifications.index') }}">
                                         <span class="fa fa-bell-o" aria-hidden="true"></span>
@@ -182,6 +205,8 @@
 
         {{-- Scripts --}}
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.4/summernote.js"></script>
+        <script src="{{ asset('js/summernote-nl.js') }}"></script>
 
         @stack('scripts')
 
@@ -189,7 +214,24 @@
             $(function () {
                 // flash auto hide
                 $('#flash-msg .alert').not('.alert-danger, .alert-important').delay(6000).slideUp(500);
-            })
+            });
+
+            $(document).ready(function() {
+                $('#summernote').summernote({
+                    height: 300,
+                    lang: 'nl-NL',
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline', 'clear']],
+                        ['font', ['strikethrough', 'superscript', 'subscript']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['view', ['fullscreen', 'codeview']],
+                        ['height', ['height']]
+                    ]
+                });
+            });
         </script>
     </body>
 </html>

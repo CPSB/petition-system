@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace ActivismeBE\Http\Controllers;
 
+use ActivismeBE\Categories;
+use ActivismeBE\Petitions;
 use Illuminate\Http\Request;
 
 /**
@@ -16,16 +18,23 @@ use Illuminate\Http\Request;
  */
 class HomeController extends Controller
 {
+    private $categories;    /** @var Categories  */
+    private $petitions;     /** @var Petitions   */
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param Categories $categories
+     * @param Petitions $petitions
      */
-    public function __construct()
+    public function __construct(Categories $categories, Petitions $petitions)
     {
         $this->middleware('banned')->only(['backend']);
         $this->middleware('auth')->only(['backend']);
         $this->middleware('lang');
+
+        $this->categories = $categories;
+        $this->petitions  = $petitions;
     }
 
     /**
@@ -35,7 +44,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $categories = $this->categories->where('module', 'petition')->take(15)->get();
+        $petitions  = $this->petitions->paginate(10);
+
+        return view('welcome', compact('categories', 'petitions'));
     }
 
     /**

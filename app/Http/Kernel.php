@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http;
+namespace ActivismeBE\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,7 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
+        \ActivismeBE\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
@@ -27,12 +27,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
+            \ActivismeBE\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            \ActivismeBE\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,9 +55,9 @@ class Kernel extends HttpKernel
         'bindings'   => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can'        => \Illuminate\Auth\Middleware\Authorize::class,
         'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'lang'       => \App\Http\Middleware\Language::class,
-        'role'       => \App\Http\Middleware\RoleMiddleware::class,
-        'banned'     => \App\Http\Middleware\ForbidBannedUser::class,
+        'guest'      => \ActivismeBE\Http\Middleware\RedirectIfAuthenticated::class,
+        'lang'       => \ActivismeBE\Http\Middleware\Language::class,
+        'role'       => \ActivismeBE\Http\Middleware\RoleMiddleware::class,
+        'banned'     => \ActivismeBE\Http\Middleware\ForbidBannedUser::class,
     ];
 }

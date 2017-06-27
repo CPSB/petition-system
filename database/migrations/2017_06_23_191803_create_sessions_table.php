@@ -32,8 +32,6 @@ class CreateSessionsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('sessions')) {
-            Schema::dropIfExists('sessions');
-        }
+        Schema::dropIfExists('sessions');
     }
 }
