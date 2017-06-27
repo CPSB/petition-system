@@ -16,20 +16,24 @@
                             <div style="margin-left: -15px;" class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h4><strong><a href="#">Test</a></strong></h4>
+                                        <h4><strong><a href="#">{{ $petition->title }}</a></strong></h4>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
                                         <a href="#" class="thumbnail">
-                                            <img src="{{ asset($petition->image_path) }}" alt="">
+                                            <img src="{{ asset($petition->image_path) }}" alt="{{ $petition->title }}">
                                         </a>
                                     </div>
 
                                     <div class="col-md-9">
-                                        <p>test</p>
-                                        <p><a class="btn btn-sm btn-info" href="">Lees meer...</a></p>
+                                        <p>{{ strip_tags($petition->text) }}</p>
+                                        <p>
+                                            <a class="btn btn-sm btn-info" href="">
+                                                <span class="fa fa-chevron-right" aria-hidden="true"></span> Lees meer
+                                            </a>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -39,8 +43,8 @@
 
                                         <p>
                                             <i class="fa fa-user" aria-hidden="true"></i> Autheur: <a href="#">Jhon doe</a>
-                                            | <i class="fa fa-calendar" aria-hidden="true"></i> 00:00:00
-                                            | <i class="fa fa-comment" aria-hidden="true"></i> <a href="#">0 Reacties</a>
+                                            | <i class="fa fa-calendar" aria-hidden="true"></i> {{ $petition->created_at->format('d/m/Y') }}
+                                            | <i class="fa fa-pencil" aria-hidden="true"></i> <a href="#">0 handtekeningen</a>
                                             | <i class="fa fa-tags" aria-hidden="true"></i> Tags:
                                             <span class="label label-primary">Geen</span>
                                         </p>
