@@ -37,4 +37,14 @@ class Petitions extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    /**
+     * Petition signatures data relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function signatures() 
+    {
+        return $this->belongsToMany(Signatures::class)->withTimestamps(); 
+    }
 }

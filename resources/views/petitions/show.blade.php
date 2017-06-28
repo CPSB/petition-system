@@ -26,7 +26,8 @@
                                 <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
                             </button>
                         </div>
-
+                    @else
+                        <span class="pull-right">Handtekeningen: <strong>0 / {{ $petition->total_signatures }}</strong></span>
                     @endif
                 </div>
 
@@ -42,7 +43,7 @@
                     <span class="fa fa-pencil" aria-hidden="true"></span> Ondersteun deze petitie:
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="">
+                    <form class="form-horizontal" id="sign" method="POST" action="">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -53,10 +54,38 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input class="form-control input-sm" placeholder="Uw ezmail adres" name="email">
+                                <input class="form-control input-sm" placeholder="Uw email adres" name="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <input class="form-control input-sm" placeholder="Code" name="postal_code">
+                            </div>
+
+                            <div class="col-md-8">
+                                <input class="form-control input-sm" placeholder="Woonplaats" name="city">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <select class="input-sm form-control" name="country_id">
+                                    <option value="">-- Selecteer uw land --</option>
+                                </select>
                             </div>
                         </div>
                     </form>
+                </div>
+
+                <div class="panel-footer">
+                    <button class="btn btn-xs btn-success" form="sign" type="submit">
+                        <span class="fa fa-pencil" aria-hidden="true"></span> Teken
+                    </button>
+
+                    <button class="btn btn-xs btn-danger" form="reset" type="reset">
+                        <span class="fa fa-undo" aria-hidden="true"></span> Reset
+                    </button>
                 </div>
             </div>
         </div> {{-- Sidebar (Signature) --}}
