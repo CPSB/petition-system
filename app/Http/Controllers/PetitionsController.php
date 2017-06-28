@@ -106,22 +106,30 @@ class PetitionsController extends Controller
         }
     }
 
+    /**
+     * Delete a petition in the system.
+     *
+     * @todo: Create unassign method for the signatures.
+     *
+     * @param  integer $id The id from the petition in the database.
+     * @return mixed
+     */
     public function destroy($id)
     {
         try {
             $petition = $this->petitions->findOrFail($id);
 
-            if ($petition->delete()) {
-                // TODO: Unassign signatures
-                // TODO: Unassign categories
-                // TODO: Unassign photo.
+            if ($petition->delete()) { // Petition has been deleted.
+                if ($photo = file_exists(public_path($petition->image_path))) { unlink($photo); }
 
+                $petition->categories()->sync([]); // Unassign categories from the petition in the pivot table.
+
+                // Output handling
                 flash('De petitie is verwijderd');
             }
 
-            return redirect()->route('petitions.index');
+            return redirect()->route('index');
         } catch (ModelNotFoundException $modelNotFoundException) {
-            dd('meh');
             return back(302);
         }
     }

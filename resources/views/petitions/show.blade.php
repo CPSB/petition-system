@@ -16,7 +16,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
-                    @if ((int) auth()->user()->id === $petition->author_id)
+                    @if (auth()->check() && auth()->user()->id == $petition->author_id)
                         <span class="pull-left">Opties:</span>
 
                         <div class="pull-right">
