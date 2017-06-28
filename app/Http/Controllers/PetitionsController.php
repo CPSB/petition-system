@@ -112,6 +112,10 @@ class PetitionsController extends Controller
             $petition = $this->petitions->findOrFail($id);
 
             if ($petition->delete()) {
+                // TODO: Unassign signatures
+                // TODO: Unassign categories
+                // TODO: Unassign photo.
+
                 flash('De petitie is verwijderd');
             }
 

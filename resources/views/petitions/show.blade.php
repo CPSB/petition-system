@@ -12,6 +12,8 @@
         </div> {{-- Petition heading --}}
 
         <div class="col-md-9"> {{-- Petition text --}}
+            <form action="{{ route('petitions.destroy', $petition) }}" method="POST" id="verwijder">{{ csrf_field() }} {{ method_field('DELETE') }}</form>
+
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     @if ((int) auth()->user()->id === $petition->author_id)
@@ -20,9 +22,9 @@
                         <div class="pull-right">
                             <a href="" class="btn btn-xs btn-default"><span class="fa fa-pencil" aria-hidden="true"></span> Wijzig</a>
                             <a href="" class="btn btn-xs btn-default"><span class="fa fa-bars" aria-hidden="true"></span> Handtekeningen</a>
-                            <a href="{{ route('petitions.destroy', $petition) }}" class="btn btn-xs btn-danger">
+                            <button form="verwijder" type="submit" class="btn btn-xs btn-danger">
                                 <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
-                            </a>
+                            </button>
                         </div>
 
                     @endif
