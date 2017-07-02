@@ -115,6 +115,8 @@ class HelpDeskController extends Controller
     }
 
     /**
+     * Get the helpdesk questions for a user.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUser()
@@ -124,6 +126,11 @@ class HelpDeskController extends Controller
             ->paginate(25);
 
         return view('helpdesk.user', compact('questions'));
+    }
+
+    public function getPublic()
+    {
+
     }
 
     /**
