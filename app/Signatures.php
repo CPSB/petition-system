@@ -12,4 +12,14 @@ class Signatures extends Model
      * @var array
      */
     protected $fillable = ['country_id', 'postal_code', 'city', 'name', 'email', 'publish'];
+
+    /**
+     * Petition relation. used for connecting the signature to the petition.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function petition()
+    {
+        return $this->belongsToMany(Petitions::class)->withTimestamps();
+    }
 }

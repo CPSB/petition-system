@@ -25,6 +25,15 @@ class CreateSignaturesTable extends Migration
                 $table->timestamps();
             });
         }
+
+        if (! Schema::hasTable('petitions_signatures')) {
+            Schema::create('petitions_signatures', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('petitions_id');
+                $table->integer('signatures_id');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -35,5 +44,6 @@ class CreateSignaturesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('signatures');
+        Schema::dropIfExists('petitions_signatures');
     }
 }

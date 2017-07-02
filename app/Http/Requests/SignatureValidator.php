@@ -4,6 +4,9 @@ namespace ActivismeBE\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed petition
+ */
 class SignatureValidator extends FormRequest
 {
     /**

@@ -45,6 +45,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" id="sign" method="POST" action="{{ route('signature.store') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="petition" value="{{ $petition->id }}">
 
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
@@ -77,12 +78,6 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="checkbox" name="publish" value="N"> Teken anoniem
-                            </div>
-                        </div>
-
                         <div class="form-group {{ $errors->has('country_id') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <select class="input-sm form-control" name="country_id">
@@ -92,6 +87,12 @@
                                         <option value="{{ $country->id }}">{{ $country->long_name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="checkbox" name="publish" value="N"> Teken anoniem
                             </div>
                         </div>
                     </form>
