@@ -71,11 +71,11 @@
 
         <div class="col-md-3"> {{-- Sidebar --}}
             <div class="well well-sm"> {{-- search well --}}
-                <form method="POST" action="">
+                <form action="{{ route('petitions.search') }}" method="GET">
                     <div class="input-group">
                         <input type="text" name="term" class="form-control" placeholder="Zoek bericht">
                         <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button">
+                            <button class="btn btn-danger" type="submit">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </span>

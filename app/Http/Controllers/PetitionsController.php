@@ -43,11 +43,20 @@ class PetitionsController extends Controller
     /**
      * Search for petitions.
      *
+     * @param  Request $input
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search()
+    public function search(Request $input)
     {
-        return view();
+        $this->validate($input, ['term' => 'required']);
+
+        $categories = $this->categories->where('module', 'petition')->take(15)->get();
+        $petitions  = $this->petitions
+            ->with(['author', 'categories', 'signatures'])
+            ->where('title', 'LIKE', "%{$input->term}%")
+            ->paginate(10);
+
+        return view('welcome', compact('categories', 'petitions'));
     }
 
     /**
