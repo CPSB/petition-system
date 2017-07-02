@@ -61,7 +61,7 @@
                         @endforeach
                     @else {{-- No petitions found --}}
                         <div class="alert alert-info alert-important" role="alert">
-                            <strong>Info:</strong> Er zijn momenteel ngeen lopende petities.
+                            <strong>Info:</strong> Er zijn momenteel geen lopende petities.
                         </div>
                     @endif
 
