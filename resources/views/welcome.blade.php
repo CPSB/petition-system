@@ -44,7 +44,7 @@
                                         <p>
                                             <i class="fa fa-user" aria-hidden="true"></i> Autheur: {{ $petition->author->name }}
                                             | <i class="fa fa-calendar" aria-hidden="true"></i> {{ $petition->created_at->format('d/m/Y') }}
-                                            | <i class="fa fa-pencil" aria-hidden="true"></i> <a href="#">0 handtekeningen</a>
+                                            | <i class="fa fa-pencil" aria-hidden="true"></i> {{ $petition->signatures->count() }} handtekeningen
                                             | <i class="fa fa-tags" aria-hidden="true"></i> Tags:
 
                                             @if ($petition->categories()->count() > 0)
