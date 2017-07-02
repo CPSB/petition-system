@@ -27,7 +27,10 @@ class HelpdeskQuestionValidator extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'         => 'required',
+            'category'      => 'required',
+            'description'   => 'required',
+            'publish'       => 'required',
         ];
     }
 }

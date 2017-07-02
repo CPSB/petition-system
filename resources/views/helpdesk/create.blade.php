@@ -54,7 +54,7 @@
                                 <input type="text" class="form-control" value="{{ old('title') }}" name="title" placeholder="De titel van uw vraag.">
 
                                 @if ($errors->has('title'))
-                                    <small class="help-block">{{ $errors->first('title') }}</small>
+                                    <small class="help-block">{{ ucfirst($errors->first('title')) }}</small>
                                 @endif
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 </select>
 
                                 @if ($errors->has('category'))
-                                    <span class="help-block"><small>{{ $errors->first('category') }}</small></span>
+                                    <span class="help-block"><small>{{ ucfirst($errors->first('category')) }}</small></span>
                                 @endif
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 <textarea name="description" rows="8" class="form-control" placeholder="Beschrijf uw vraag"></textarea>
 
                                 @if ($errors->has('description'))
-                                    <span class="help-block"><small>{{ $errors->first('description') }}</small></span>
+                                    <span class="help-block"><small>{{ ucfirst($errors->first('description')) }}</small></span>
                                 @else
                                     <span class="help-block"><small>(Dit veld is markdown ondersteund)</small></span>
                                 @endif
@@ -107,7 +107,7 @@
                                 </div>
 
                                 @if ($errors->has('publish'))
-                                    <span class="help-block"><small>{{ $errors->first('publish') }}</small></span>
+                                    <span class="help-block"><small>{{ ucfirst($errors->first('publish')) }}</small></span>
                                 @endif
                             </div>
                         </div>
