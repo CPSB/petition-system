@@ -3,11 +3,11 @@
 namespace ActivismeBE\Http\Controllers;
 
 use ActivismeBE\Categories;
+use ActivismeBE\Countries;
 use ActivismeBE\Http\Requests\PetitionValidator;
 use ActivismeBE\Petitions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -19,14 +19,16 @@ class PetitionsController extends Controller
 {
     private $petitions;  /** @var Petitions  */
     private $categories; /** #var Categories */
+    private $countries;  /** @var Countries  */
 
     /**
      * PetitionsController constructor.
      *
      * @param Petitions  $petitions
      * @param Categories $categories
+     * @param Countries  $countries
      */
-    public function __construct(Petitions $petitions, Categories $categories)
+    public function __construct(Petitions $petitions, Categories $categories, Countries $countries)
     {
         $routes = ['create', 'store'];
 
@@ -35,6 +37,7 @@ class PetitionsController extends Controller
 
         $this->petitions  = $petitions;
         $this->categories = $categories;
+        $this->countries  = $countries;
     }
 
     /**
@@ -75,8 +78,8 @@ class PetitionsController extends Controller
 
         $image->fit(250, 250, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($path)
-        ;
+        })->save($path);
+
         $input->merge(['author_id' => auth()->user()->id, 'image_path' => $path]);
         // END Image upload
 
@@ -98,9 +101,10 @@ class PetitionsController extends Controller
     public function show($id)
     {
         try {
-            $petition = $this->petitions->findorFail($id);
+            $petition  = $this->petitions->findorFail($id);
+            $countries = $this->countries->all();
 
-            return view('petitions.show', compact('petition'));
+            return view('petitions.show', compact('petition', 'countries'));
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back(302);
         }

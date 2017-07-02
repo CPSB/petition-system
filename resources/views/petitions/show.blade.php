@@ -72,6 +72,10 @@
                             <div class="col-md-12">
                                 <select class="input-sm form-control" name="country_id">
                                     <option value="">-- Selecteer uw land --</option>
+
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->long_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

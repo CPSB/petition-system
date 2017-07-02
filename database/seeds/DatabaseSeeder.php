@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(QuestionCategorySeeder::class);
+        $this->call(CountryTableSeeder::class);
     }
 
     /**

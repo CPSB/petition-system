@@ -8,6 +8,11 @@ use ActivismeBE\Notifications\NewComment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
+/**
+ * Class CommentsController
+ *
+ * @package ActivismeBE\Http\Controllers
+ */
 class CommentsController extends Controller
 {
     /**
