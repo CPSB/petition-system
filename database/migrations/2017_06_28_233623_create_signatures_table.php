@@ -16,8 +16,9 @@ class CreateSignaturesTable extends Migration
         if (! Schema::hasTable('signatures')) {
             Schema::create('signatures', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('publish')->default('Y');
                 $table->integer('country_id');
-                $table->integer('postal_code'); 
+                $table->integer('postal_code');
                 $table->string('city');
                 $table->string('name');
                 $table->string('email');

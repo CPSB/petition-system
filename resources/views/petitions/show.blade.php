@@ -43,32 +43,47 @@
                     <span class="fa fa-pencil" aria-hidden="true"></span> Ondersteun deze petitie:
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" id="sign" method="POST" action="">
+                    <form class="form-horizontal" id="sign" method="POST" action="{{ route('signature.store') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <input class="form-control input-sm" placeholder="Uw naam" name="name">
+                                @if ($errors->has('name')) <small class="help-block">{{ ucfirst($errors->first('name')) }}</small> @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <input class="form-control input-sm" placeholder="Uw email adres" name="email">
+                                @if ($errors->has('email')) <small class="help-block">{{ ucfirst($errors->first('email')) }}</small> @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('postal_code') ? ' has-error' : '' }}">
                             <div class="col-md-4">
                                 <input class="form-control input-sm" placeholder="Code" name="postal_code">
                             </div>
 
-                            <div class="col-md-8">
+                            <div class="col-md-8 {{ $errors->has('city') ? ' has-error' : '' }}">
                                 <input class="form-control input-sm" placeholder="Woonplaats" name="city">
                             </div>
+
+                            @if ($errors->has('postal_code') || $errors->has('city'))
+                                <div class="col-md-12">
+                                    @if ($errors->has('city'))          <small class="help-block"> {{ ucfirst($errors->first('city')) }}        </small> @endif
+                                    @if ($errors->has('postal_code'))   <small class="help-block"> {{ ucfirst($errors->first('postal_code')) }} </small> @endif
+                                </div>
+                            @endif
                         </div>
 
                         <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="checkbox" name="publish" value="N"> Teken anoniem
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('country_id') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <select class="input-sm form-control" name="country_id">
                                     <option value="">-- Selecteer uw land --</option>

@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('helpdesk/user', 'HelpDeskController@getUser')->name('helpdesk.user');
 Route::resource('helpdesk', 'HelpDeskController');
 
+Route::resource('signature', 'SignatureController');
 Route::resource('petitions', 'PetitionsController');
 
 Route::get('comments/store', 'CommentsController@store')->name('comments.store');

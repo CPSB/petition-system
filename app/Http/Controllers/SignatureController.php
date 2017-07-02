@@ -2,6 +2,7 @@
 
 namespace ActivismeBE\Http\Controllers;
 
+use ActivismeBE\Http\Requests\SignatureValidator;
 use Illuminate\Http\Request;
 
 class SignatureController extends Controller
@@ -15,59 +16,15 @@ class SignatureController extends Controller
     {
         return view();
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param SignatureValidator $input
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SignatureValidator $input)
     {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        dd($input->all());
     }
 }
