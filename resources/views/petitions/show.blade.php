@@ -49,25 +49,25 @@
 
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <input class="form-control input-sm" placeholder="Uw naam" name="name">
+                                <input class="form-control input-sm" placeholder="Uw naam" value="{{ old('name') }}" name="name">
                                 @if ($errors->has('name')) <small class="help-block">{{ ucfirst($errors->first('name')) }}</small> @endif
                             </div>
                         </div>
 
                         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <input class="form-control input-sm" placeholder="Uw email adres" name="email">
+                                <input class="form-control input-sm" value="{{ old('email') }}" placeholder="Uw email adres" name="email">
                                 @if ($errors->has('email')) <small class="help-block">{{ ucfirst($errors->first('email')) }}</small> @endif
                             </div>
                         </div>
 
                         <div class="form-group {{ $errors->has('postal_code') ? ' has-error' : '' }}">
                             <div class="col-md-4">
-                                <input class="form-control input-sm" placeholder="Code" name="postal_code">
+                                <input class="form-control input-sm" placeholder="Code" value="{{ old('postal_code') }}" name="postal_code">
                             </div>
 
                             <div class="col-md-8 {{ $errors->has('city') ? ' has-error' : '' }}">
-                                <input class="form-control input-sm" placeholder="Woonplaats" name="city">
+                                <input class="form-control input-sm" placeholder="Woonplaats" value="{{ old('city') }}" name="city">
                             </div>
 
                             @if ($errors->has('postal_code') || $errors->has('city'))

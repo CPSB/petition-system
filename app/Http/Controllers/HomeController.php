@@ -44,10 +44,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = $this->categories->where('module', 'petition')->take(15)->get();
-        $petitions  = $this->petitions->with(['author', 'categories', 'signatures'])->paginate(10);
-
-        return view('welcome', compact('categories', 'petitions'));
+        return view('welcome');
     }
 
     /**

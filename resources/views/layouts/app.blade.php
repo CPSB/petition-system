@@ -70,6 +70,11 @@
                                     </a>
                                 </li>
                             @else
+                                <li class="{{ Request::is('petitions*') ? 'active' : '' }}">
+                                    <a href="{{ route('petitions.index') }}">
+                                        <span class="fa fa-list" aria-hidden="true"></span> Petities
+                                    </a>
+                                </li>
                                 <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
                                     <a href="{{ route('disclaimer.index') }}">
                                         <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer

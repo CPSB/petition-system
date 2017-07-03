@@ -148,7 +148,7 @@ class HelpDeskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $id The helpdesk question id in the database.
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

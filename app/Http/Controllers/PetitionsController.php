@@ -59,6 +59,14 @@ class PetitionsController extends Controller
         return view('welcome', compact('categories', 'petitions'));
     }
 
+    public function index() 
+    {
+        $categories = $this->categories->where('module', 'petition')->take(15)->get();
+        $petitions  = $this->petitions->with(['author', 'categories', 'signatures'])->paginate(10);
+
+        return view('petitions.index', compact('categories', 'petitions'));
+    }
+
     /**
      * Create view for a petition.
      *
