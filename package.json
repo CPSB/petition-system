@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "flag-icon-css": "^2.8.0",
+    "node-sass": "^4.5.3",
     "octicons": "^5.0.1",
     "primer-blankslate": "^0.3.5",
     "primer-css": "^6.0.0"

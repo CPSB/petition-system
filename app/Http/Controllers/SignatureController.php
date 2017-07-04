@@ -5,6 +5,7 @@ namespace ActivismeBE\Http\Controllers;
 use ActivismeBE\Http\Requests\SignatureValidator;
 use ActivismeBE\Petitions;
 use ActivismeBE\Signatures;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 /**
@@ -15,27 +16,40 @@ use Illuminate\Http\Request;
 class SignatureController extends Controller
 {
     private $signature; /** @var Signatures */
+    private $petition;  /** @var Petitions  */
 
     /**
      * SignatureController constructor.
      *
      * @param Signatures $signature
+     * @param Petitions  $petition
      */
-    public function __construct(Signatures $signature)
+    public function __construct(Signatures $signature, Petitions $petition)
     {
         $this->middleware('lang');
 
         $this->signature = $signature;
+        $this->petition  = $petition;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param  Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view();
+        try {
+            $petition = $this->petition->where('author_id', auth()->user()->id)
+                ->where('id', $request->petition)
+                ->with(['categories', 'author', 'signatures.country'])
+                ->firstOrFail();
+
+            return view('signatures.index', compact('petition'));
+        } catch (ModelNotFoundException $exception) {
+            return app()->abort(404);
+        }
     }
 
     /**
@@ -50,7 +64,7 @@ class SignatureController extends Controller
         $database = $this->signature;
 
         if ($sign = $database->create($filter)) {
-            $this->signature->find($input->petition)->petition()->attach($sign->id);
+            $database->find($input->petition)->petition()->attach($sign->id);
             flash('Wij hebben uw handtekeningen verwerkt.')->success();
         }
 

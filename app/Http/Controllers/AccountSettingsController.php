@@ -17,16 +17,20 @@ use Illuminate\Http\Request;
  */
 class AccountSettingsController extends Controller
 {
+    private $users; /** @var User */
+
     /**
      * Account Settings constructor
      *
-     * @return void
+     * @param User $users
      */
-    public function __construct()
+    public function __construct(User $users)
     {
         $this->middleware('auth');
         $this->middleware('banned');
         $this->middleware('lang');
+
+        $this->users = $users;
     }
 
     /**
@@ -36,8 +40,22 @@ class AccountSettingsController extends Controller
      */
     public function index()
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = $this->users->findOrFail(auth()->user()->id);
         return view('auth.settings', compact('user'));
+    }
+
+    /**
+     * Return a user profile in the application.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($userId)
+    {
+        if ($userId == auth()->user()->id) { // The user u want to display is the authencated user.
+            return view();
+        } else {
+            return view();
+        }
     }
 
     /**
@@ -53,7 +71,7 @@ class AccountSettingsController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
         ]);
 
-        if (User::findOrFail(auth()->user()->id)->update($request->all())) {
+        if ($this->users->findOrFail(auth()->user()->id)->update($request->all())) {
             flash(trans('profile-settings.flash-info'))->success();
         }
 
@@ -70,7 +88,7 @@ class AccountSettingsController extends Controller
     {
         $this->validate($request, ['password' => 'required|string|min:6|confirmed']);
 
-        if (User::findOrFail(auth()->user()->id)->update(bcrypt($request->all()))) {
+        if ($this->users->findOrFail(auth()->user()->id)->update(bcrypt($request->all()))) {
             flash(trans('profile-settings.flash-password'))->success();
         }
 

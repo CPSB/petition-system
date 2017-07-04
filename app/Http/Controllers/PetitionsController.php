@@ -59,7 +59,7 @@ class PetitionsController extends Controller
         return view('welcome', compact('categories', 'petitions'));
     }
 
-    public function index() 
+    public function index()
     {
         $categories = $this->categories->where('module', 'petition')->take(15)->get();
         $petitions  = $this->petitions->with(['author', 'categories', 'signatures'])->paginate(10);
@@ -131,6 +131,7 @@ class PetitionsController extends Controller
      * Delete a petition in the system.
      *
      * @todo: Create unassign method for the signatures.
+     * @todo: If petition category is only used for this petition the category should also be deleted.
      *
      * @param  integer $id The id from the petition in the database.
      * @return mixed
@@ -141,7 +142,9 @@ class PetitionsController extends Controller
             $petition = $this->petitions->findOrFail($id);
 
             if ($petition->delete()) { // Petition has been deleted.
-                if ($photo = file_exists(public_path($petition->image_path))) { unlink($photo); }
+                if (file_exists(public_path($petition->image_path))) {
+                    unlink(public_path($petition->image_path));
+                }
 
                 $petition->categories()->sync([]); // Unassign categories from the petition in the pivot table.
 
@@ -149,7 +152,7 @@ class PetitionsController extends Controller
                 flash('De petitie is verwijderd');
             }
 
-            return redirect()->route('index');
+            return redirect()->route('petitions.index');
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back(302);
         }

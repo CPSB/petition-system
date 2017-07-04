@@ -19,9 +19,17 @@
                     @if (auth()->check() && auth()->user()->id == $petition->author_id)
                         <span class="pull-left">Opties:</span>
 
+                        <form action="{{ route('signature.index') }}" method="GET" id="signatures">
+                            <input type="hidden" name="petition" value="{{ $petition->id }}">
+                        </form>
+
                         <div class="pull-right">
                             <a href="" class="btn btn-xs btn-default"><span class="fa fa-pencil" aria-hidden="true"></span> Wijzig</a>
-                            <a href="" class="btn btn-xs btn-default"><span class="fa fa-bars" aria-hidden="true"></span> Handtekeningen</a>
+
+                            <button form="signatures" class="btn btn-xs btn-default">
+                                <span class="fa fa-bars" aria-hidden="true"></span> Handtekeningen
+                            </button>
+
                             <button form="verwijder" type="submit" class="btn btn-xs btn-danger">
                                 <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
                             </button>

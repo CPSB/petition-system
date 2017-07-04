@@ -22,4 +22,14 @@ class Signatures extends Model
     {
         return $this->belongsToMany(Petitions::class)->withTimestamps();
     }
+
+    /**
+     * Country data relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function country()
+    {
+        return $this->belongsTo(Countries::class, 'country_id');
+    }
 }

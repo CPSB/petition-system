@@ -44,7 +44,9 @@ Route::group(['middleware' => ['auth']], function() {
  *
  * Below you can fill in your application routes.
  */
+Route::get('export/excel/{type}/{id}', 'ExportController@export')->name('export');
 
+Route::get('helpdesk/public', 'HelpdeskController@getPublic')->name('helpdesk.public');
 Route::get('helpdesk/user', 'HelpDeskController@getUser')->name('helpdesk.user');
 Route::resource('helpdesk', 'HelpDeskController');
 

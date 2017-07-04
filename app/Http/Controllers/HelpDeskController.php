@@ -54,14 +54,16 @@ class HelpDeskController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->where('module', 'helpdesk-categories')->get();
+        $categories = $this->categories
+            ->where('module', 'helpdesk-categories')->get();
+
         return view('helpdesk.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param HelpdeskQuestionValidator     $input
      * @return \Illuminate\Http\Response
      */
     public function store(HelpdeskQuestionValidator $input)
@@ -128,9 +130,18 @@ class HelpDeskController extends Controller
         return view('helpdesk.user', compact('questions'));
     }
 
+    /**
+     * Get the public helpdesk tickets.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getPublic()
     {
+        $questions = $this->tickets->where('publish', 'Y')
+            ->with(['categories', 'author', 'comments'])
+            ->paginate(25);
 
+        return view('helpdesk.user', compact('questions'));
     }
 
     /**

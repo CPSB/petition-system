@@ -38,6 +38,12 @@
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
                         {{-- Left Side Of Navbar --}}
                         <ul class="nav navbar-nav">
+                            <li class="{{ Request::is('petitions*') ? 'active' : '' }}">
+                                <a href="{{ route('petitions.index') }}">
+                                    <span class="fa fa-list" aria-hidden="true"></span> Petities
+                                </a>
+                            </li>
+
                             @if (Auth::check())
                                 @if (auth()->check() && auth()->user()->hasRole('Admin'))
                                      <li class="dropdown">
@@ -70,11 +76,6 @@
                                     </a>
                                 </li>
                             @else
-                                <li class="{{ Request::is('petitions*') ? 'active' : '' }}">
-                                    <a href="{{ route('petitions.index') }}">
-                                        <span class="fa fa-list" aria-hidden="true"></span> Petities
-                                    </a>
-                                </li>
                                 <li class="{{ Request::is('disclaimer*') ? 'active' : '' }}">
                                     <a href="{{ route('disclaimer.index') }}">
                                         <span class="fa fa-legal" aria-hidden="true"></span> Disclaimer

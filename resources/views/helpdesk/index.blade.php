@@ -31,22 +31,22 @@
                 <div class="panel panel-info">
                     <div class="panel-heading"><span class="fa fa-bar-chart" aria-hidden="true"></span> Statistieken:</div>
 
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">
+                    <ul class="list-group">
+                        <li class="list-group-item">
                             <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Gesloten vragen:
                             <span class="label label-danger pull-right">0</span>
-                        </a>
+                        </li>
 
-                        <a href="#" class="list-group-item">
+                        <li class="list-group-item">
                             <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Open vragen:
                             <span class="label label-success pull-right">{{ $open }}</span>
-                        </a>
+                        </li>
 
-                        <a href="#" class="list-group-item">
+                        <li class="list-group-item">
                             <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Totaal aantal vragen:
                             <span class="label label-info pull-right">{{ $all }}</span>
-                        </a>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                     <div class="list-group">
                         <a href="{{ route('helpdesk.create') }}" class="list-group-item"><span class="fa fa-btn fa-plus" aria-hidden="true"></span> Stel een nieuwe vraag.</a>
                         <a href="{{ route('helpdesk.user') }}" class="list-group-item"><span class="fa fa-btn fa-user" aria-hidden="true"></span> Bekijk jouw vragen.</a>
-                        <a href="" class="list-group-item"><span class="fa fa-btn fa-globe" aria-hidden="true"></span> Bekijk de publieke vragen.</a>
+                        <a href="{{ route('helpdesk.public') }}" class="list-group-item"><span class="fa fa-btn fa-globe" aria-hidden="true"></span> Bekijk de publieke vragen.</a>
                     </div>
                 </div>
             </div>
