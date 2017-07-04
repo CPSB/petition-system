@@ -6,7 +6,18 @@
 
         <div class="col-md-9"> {{-- Question content --}}
             <div class="panel panel-default">
-                <div class="panel-heading">Question: {{ $question->title }}</div>
+                <div class="panel-heading">
+                    Question: {{ $question->title }}
+
+                    @if ((int) $question->author_id === auth()->user()->id)
+                        <div class="pull-right">
+                            <a href="" class="btn btn-xs btn-default">
+                                <span class="fa fa-pencil" aria-hidden="true"></span> Edit
+                            </a>
+                        </div>
+                    @endif
+                </div>
+
                 <div class="panel-body">{{ $question->description }}</div>
             </div>
 

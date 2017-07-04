@@ -28,7 +28,7 @@ class HelpdeskQuestionValidator extends FormRequest
     {
         return [
             'title'         => 'required',
-            'category'      => 'required',
+            'category_id'   => 'required',
             'description'   => 'required',
             'publish'       => 'required',
         ];

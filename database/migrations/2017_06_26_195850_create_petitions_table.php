@@ -16,7 +16,8 @@ class CreatePetitionsTable extends Migration
         if (! Schema::hasTable('petitions')) {
             Schema::create('petitions', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('author_id');
+                $table->integer('author_id')->unsigned()->index();
+                $table->foreign('author_id')->references('id')->on('users');
                 $table->text('image_path');
                 $table->string('title');
                 $table->string('total_signatures');
@@ -28,8 +29,13 @@ class CreatePetitionsTable extends Migration
         if (! Schema::hasTable('categories_petitions')) {
             Schema::create('categories_petitions', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('categories_id');
-                $table->integer('petitions_id');
+
+                $table->integer('categories_id')->unsigned()->index();
+                $table->foreign('categories_id')->references()->on('categories');
+
+                $table->integer('petitions_id')->unsigned()->index();
+                $table->foreign('petitions_id')->references()->on('petitions');
+
                 $table->timestamps();
             });
         }
