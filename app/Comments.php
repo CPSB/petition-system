@@ -28,6 +28,11 @@ class Comments extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    /**
+     * Support question data relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function supportQuestion()
     {
         return $this->belongsToMany(Helpdesk::class)->withTimestamps();
