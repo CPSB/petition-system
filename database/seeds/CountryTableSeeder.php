@@ -2,6 +2,7 @@
 
 use ActivismeBE\Countries;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CountryTableSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class CountryTableSeeder extends Seeder
     public function run()
     {
         DB::table('countries')->delete();
+
         Countries::insert([
             [
                 'long_name' => 'Afghanistan',
