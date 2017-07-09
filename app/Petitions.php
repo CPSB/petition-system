@@ -16,7 +16,7 @@ class Petitions extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'image_path', 'text', 'author_id', 'total_signatures'];
+    protected $fillable = ['title', 'image_path', 'text', 'author_id', 'total_signatures', 'type', 'mailing_id'];
 
     /**
      * Petition categories data relation.
@@ -30,7 +30,7 @@ class Petitions extends Model
 
     /**
      * Author data relation.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function author()
@@ -43,8 +43,8 @@ class Petitions extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function signatures() 
+    public function signatures()
     {
-        return $this->belongsToMany(Signatures::class)->withTimestamps(); 
+        return $this->belongsToMany(Signatures::class)->withTimestamps();
     }
 }

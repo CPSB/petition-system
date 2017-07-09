@@ -28,6 +28,7 @@ class PetitionValidator extends FormRequest
     {
         return [
             'title'             => 'required',
+            'type'              => 'required',
             'total_signatures'  => 'required',
             'text'              => 'required',
             'categories'        => 'required',

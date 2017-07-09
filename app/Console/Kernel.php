@@ -3,6 +3,7 @@
 namespace ActivismeBE\Console;
 
 use ActivismeBE\Console\Commands\AuthPermissionCommand;
+use ActivismeBE\Console\Commands\MailingTokenClean;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,9 +14,7 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        AuthPermissionCommand::class
-    ];
+    protected $commands = [AuthPermissionCommand::class, MailingTokenClean::class];
 
     /**
      * Define the application's command schedule.
@@ -31,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run')->daily()->at('02:00');
         $schedule->command('backup:monitor')->daily()->at('03:00');
         $schedule->command('ban:delete-expired')->everyMinute();
+        $schedule->command('token-mailing:clean')->everyMinute();
     }
 
     /**

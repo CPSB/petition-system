@@ -5,6 +5,7 @@ namespace ActivismeBE\Http\Controllers;
 use ActivismeBE\Categories;
 use ActivismeBE\Countries;
 use ActivismeBE\Http\Requests\PetitionValidator;
+use ActivismeBE\Tokens;
 use ActivismeBE\Petitions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -17,27 +18,30 @@ use Intervention\Image\Facades\Image;
  */
 class PetitionsController extends Controller
 {
-    private $petitions;  /** @var Petitions  */
-    private $categories; /** #var Categories */
-    private $countries;  /** @var Countries  */
+    private $petitions;         /** @var Petitions          */
+    private $categories;        /** #var Categories         */
+    private $countries;         /** @var Countries          */
+    private $token;             /** @var Tokens             */
 
     /**
      * PetitionsController constructor.
      *
-     * @param Petitions  $petitions
-     * @param Categories $categories
-     * @param Countries  $countries
+     * @param Petitions     $petitions
+     * @param Categories    $categories
+     * @param Countries     $countries
+     * @param Tokens        $token
      */
-    public function __construct(Petitions $petitions, Categories $categories, Countries $countries)
+    public function __construct(Petitions $petitions, Categories $categories, Countries $countries, Tokens $token)
     {
         $routes = ['create', 'store'];
 
         $this->middleware('lang');
         $this->middleware('auth')->only($routes);
 
-        $this->petitions  = $petitions;
-        $this->categories = $categories;
-        $this->countries  = $countries;
+        $this->petitions        = $petitions;
+        $this->categories       = $categories;
+        $this->countries        = $countries;
+        $this->token            = $token;
     }
 
     /**
@@ -59,6 +63,11 @@ class PetitionsController extends Controller
         return view('welcome', compact('categories', 'petitions'));
     }
 
+    /**
+     * Get the index page for the petitions.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $categories = $this->categories->where('module', 'petition')->take(15)->get();
@@ -104,6 +113,14 @@ class PetitionsController extends Controller
             foreach ($categories as $category) {
                 $insert = $this->categories->firstOrCreate(['name' => trim($category), 'module' => 'petition']);
                 $this->petitions->find($petition->id)->categories()->attach($insert->id);
+            }
+
+            $tokenData = ['section' => 'mailing-petition', 'token' => str_random(20)];
+
+            if ($input->type === 'mailing' && $this->token->create($tokenData)) {
+                return redirect()->route('petition.mail.addresses', [
+                    'id' => $petition->id, 'token' => $tokenData['token']
+                ]);
             }
         }
         return redirect()->route('petitions.show', $petition);

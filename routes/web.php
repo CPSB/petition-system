@@ -56,3 +56,5 @@ Route::get('petitions/search/petition', 'PetitionsController@search')->name('pet
 
 Route::get('comments/store', 'CommentsController@store')->name('comments.store');
 Route::get('comments/delete/{questionId}', 'CommentsController@destroy')->name('comments.delete');
+
+Route::get('/mailing/petition/create', 'MailingPetitionController@create')->name('petition.mail.addresses');
