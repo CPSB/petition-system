@@ -30,10 +30,8 @@ class CreatePetitionsTable extends Migration
         if (! Schema::hasTable('categories_petitions')) {
             Schema::create('categories_petitions', function (Blueprint $table) {
                 $table->increments('id');
-
                 $table->integer('categories_id');
                 $table->integer('petitions_id');
-
                 $table->timestamps();
             });
         }
