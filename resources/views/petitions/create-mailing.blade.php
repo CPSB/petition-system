@@ -19,6 +19,13 @@
                                 <input class="form-control" name="email" placeholder="Email adres van de ontvanger.">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-10">
+
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
