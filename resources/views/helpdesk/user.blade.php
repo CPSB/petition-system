@@ -54,9 +54,9 @@
                                         <a href="{{ route('helpdesk.show', ['helpdesk' => $question->id]) }}" class="label label-info">Show</a>
 
                                         @if ((string) $question->open === 'Y') {{-- The question open --}}
-                                        <a href="" class="label label-danger">Close</a>
+                                            <a href="" class="label label-danger">Close</a>
                                         @else {{-- The question is closed --}}
-                                        <a href="" class="label label-success">Reopen</a>
+                                            <a href="" class="label label-success">Reopen</a>
                                         @endif
                                     </td> {{-- /Options --}}
                                 </tr>
