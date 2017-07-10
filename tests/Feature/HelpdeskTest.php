@@ -60,7 +60,7 @@ class HelpdeskTest extends TestCase
     {
         $this->actingAs($this->user)
             ->seeIsAuthenticatedAs($this->user)
-            ->get(route('helpdesk.user'))
+            ->get(route('helpdesk.public'))
             ->assertStatus(200);
     }
 
