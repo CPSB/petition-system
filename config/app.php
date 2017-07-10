@@ -186,6 +186,7 @@ return [
         ActivismeBE\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Mpociot\LaravelTestFactoryHelper\TestFactoryHelperServiceProvider::class,
 
     ],
 
