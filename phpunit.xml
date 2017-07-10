@@ -23,6 +23,9 @@
         </whitelist>
     </filter>
     <php>
+        <env name="AUTH_SOCIAL" value="true"/>
+        <env name="AUTH_REGISTER" value="true"/>
+        <env name="AUTH_LOGIN" value="true"/>
         <env name="DB_CONNECTION" value="testing"/>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>

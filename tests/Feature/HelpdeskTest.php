@@ -99,6 +99,9 @@ class HelpdeskTest extends TestCase
         // $this->assertDatabaseHas('helpdesks', $input);
     }
 
+    /**
+     * @test
+     */
     public function testStoreNewQuestionNoAuth()
     {
         $this->post(route('helpdesk.store'), [])
