@@ -28,8 +28,8 @@ class PetitionValidator extends FormRequest
     {
         return [
             'title'             => 'required',
-            'type'              => 'required',
-            'total_signatures'  => 'required',
+            // 'type'              => 'required',
+            'total_signatures'  => 'required|integer',
             'text'              => 'required',
             'categories'        => 'required',
             'image'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

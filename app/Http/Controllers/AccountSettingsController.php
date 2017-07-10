@@ -55,7 +55,7 @@ class AccountSettingsController extends Controller
     public function show($userId)
     {
         if ($userId == auth()->user()->id) { // The user u want to display is the authencated user.
-            return view();
+            return redirect()->route('settings.index');
         } else {
             return view();
         }
@@ -73,9 +73,6 @@ class AccountSettingsController extends Controller
             'first_name'    => 'required|string|max:255',
             'last_name'     => 'required|string|max:255',
             'email'         => 'required|string|email|max:255|unique:users',
-            'postal_code'   => 'required|string|max:255',
-            'city'          => 'required|string',
-            'country'       => 'required|max:10|integer',
         ]);
 
         $request->merge(['name' => "{$request->first_name} {$request->last_name}"]);

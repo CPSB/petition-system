@@ -161,7 +161,7 @@
                                         <li><a href="">Nieuwe organisatie</a></li>
 
                                         @if (! auth()->user()->hasRole('Admin'))
-                                            <li><a href="">Nieuw helpdesk ticket</a></li>
+                                            <li><a href="{{ route('helpdesk.create') }}">Nieuw helpdesk ticket</a></li>
                                         @endif
                                     </ul>
                                 </li>

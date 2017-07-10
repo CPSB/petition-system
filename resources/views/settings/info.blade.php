@@ -15,22 +15,30 @@
                         Naam: <span class="text-danger">*</span>
                     </label>
 
-                    <div class="col-md-5">
+                    <div class="col-md-5 {{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <input type="text" class="form-control" name="first_name" value="{{ auth()->user()->first_name }}" placeholder="Voornaam">
                     </div>
 
-                    <div class="col-md-5">
+                    <div class="col-md-5 {{ $errors->has('last_name') ? ' has-error' : '' }}">
                         <input type="text" class="form-control" name="last_name" value="{{ auth()->user()->last_name }}" placeholder="Achternaam">
                     </div>
+
+                    @if ($errors->has('last_name') || $errors->has('first_name'))
+                        <div class="col-md-offset-2 col-md-12">
+                            @if ($errors->has('first_name')) <small class="text-danger"> {{ $errors->first('first_name') }} </small> <br/> @endif
+                            @if ($errors->has('last_name'))  <small class="text-danger"> {{ $errors->first('last_name') }}  </small> @endif
+                        </div>
+                    @endif
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                     <label class="control-label col-md-2">
                         E-mail: <span class="text-danger">*</span>
                     </label>
 
                     <div class="col-md-10">
-                        <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" placeholder="Email adres">
+                        <input type="email" class="form-control" name="email" value="" placeholder="Email adres">
+                        @if ($errors->has('email')) <small class="text-danger"> {{ $errors->first('email') }} </small> @endif
                     </div>
                 </div>
             </fieldset>
@@ -62,7 +70,9 @@
                             <option value="">-- Selecteer je land van woonst --</option>
 
                             @foreach($countries as $country)
-                                <option value="{{ $country->id }}">{{ $country->long_name }}</option>
+                                <option value="{{ $country->id }}" @if ((int) auth()->user()->country === $country->id) selected @endif>
+                                    {{ $country->long_name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

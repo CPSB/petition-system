@@ -86,6 +86,10 @@ class PetitionsController extends Controller
         return view('petitions.create');
     }
 
+    public function edit()
+    {
+        return view('petitions.edit');
+    }
 
     /**
      * Store a new petition in the system.
@@ -108,6 +112,8 @@ class PetitionsController extends Controller
 
         $input->merge(['author_id' => auth()->user()->id, 'image_path' => $path]);
         // END Image upload
+
+        if (is_null($input->type)) { $input->merge(['type' => 'petition']); }
 
         if ($petition = $this->petitions->create($input->except(['_token', 'categories']))) {
             foreach ($categories as $category) {

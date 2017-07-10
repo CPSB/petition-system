@@ -17,7 +17,7 @@
                             </label>
 
                             <div class="col-md-7">
-                                <input type="text" class="form-control" {{ old('title') }} placeholder="Petitie titel" name="title">
+                                <input type="text" class="form-control" value="{{ old('title') }}" placeholder="Petitie titel" name="title">
                             </div>
 
                             <div class="col-md-3">
@@ -32,25 +32,27 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                            <label class="control-label col-md-2">
-                                Petitie type: <span class="text-danger">*</span>
-                            </label>
+                        @if (auth()->user()->hasRole('Admin'))
+                            <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                <label class="control-label col-md-2">
+                                    Petitie type: <span class="text-danger">*</span>
+                                </label>
 
-                            <div class="col-md-10">
-                                <select class="form-control" name="type">
-                                    <option value="">-- Selecteer het type van de petitie -- </option>
-                                    <option value="petition"> Gewone petitie (elke hantekening word opgeslagen als lijst.)</option>
-                                    <option value="mailing"> Mailing petitie (bij elke handtekening word een mail gezonden.)</option>
-                                </select>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="type">
+                                        <option value="">-- Selecteer het type van de petitie -- </option>
+                                        <option value="petition"> Gewone petitie (elke hantekening word opgeslagen als lijst.)</option>
+                                        <option value="mailing"> Mailing petitie (bij elke handtekening word een mail gezonden.)</option>
+                                    </select>
 
-                                @if ($errors->has('type'))
-                                    <small class="help-block">{{ ucfirst($errors->first('type')) }}</small>
-                                @else
-                                    <small class="help-block">Het type van de petitie kan niet meer gewijzigd worden na de creatie.</small>
-                                @endif
+                                    @if ($errors->has('type'))
+                                        <small class="help-block">{{ ucfirst($errors->first('type')) }}</small>
+                                    @else
+                                        <small class="help-block">Het type van de petitie kan niet meer gewijzigd worden na de creatie.</small>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                             <label class="control-label col-md-2">

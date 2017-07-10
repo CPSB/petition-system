@@ -24,7 +24,9 @@
                         </form>
 
                         <div class="pull-right">
-                            <a href="" class="btn btn-xs btn-default"><span class="fa fa-pencil" aria-hidden="true"></span> Wijzig</a>
+                            <a href="{{ route('petitions.edit', $petition) }}" class="btn btn-xs btn-default">
+                                <span class="fa fa-pencil" aria-hidden="true"></span> Wijzig
+                            </a>
 
                             <button form="signatures" class="btn btn-xs btn-default">
                                 <span class="fa fa-bars" aria-hidden="true"></span> Handtekeningen
