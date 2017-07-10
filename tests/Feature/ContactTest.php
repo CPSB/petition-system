@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use ActivismeBE\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -35,5 +36,30 @@ class ContactTest extends TestCase
         $this->post(route('contact.store'))
             ->assertStatus(302)
             ->assertSessionHasErrors();
+    }
+
+    public function testContactBackendOk()
+    {
+        $this->actingAs($this->adminUser)
+            ->seeIsAuthenticatedAs($this->adminUser)
+            ->get(route('contact.backend.index'))
+            ->assertStatus(200);
+    }
+
+    public function testContactBackendNoPerm()
+    {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+            ->seeIsAuthenticatedAs($user)
+            ->get(route('contact.backend.index'))
+            ->assertStatus(403);
+    }
+
+    public function testContactBackendNotAuthencated()
+    {
+        $this->get(route('contact.backend.index'))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
     }
 }
