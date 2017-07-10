@@ -19,7 +19,7 @@ class User extends Authenticatable implements HasBansContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'first_name', 'last_name', 'city', 'postal_code', 'country', 'email', 'password',
     ];
 
     /**

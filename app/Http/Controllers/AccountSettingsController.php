@@ -2,6 +2,7 @@
 
 namespace ActivismeBE\Http\Controllers;
 
+use ActivismeBE\Countries;
 use ActivismeBE\User;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,10 @@ class AccountSettingsController extends Controller
      */
     public function index()
     {
-        $user = $this->users->findOrFail(auth()->user()->id);
-        return view('auth.settings', compact('user'));
+        $user      = $this->users->findOrFail(auth()->user()->id);
+        $countries = Countries::all();
+
+        return view('auth.settings', compact('user', 'countries'));
     }
 
     /**
@@ -67,9 +70,15 @@ class AccountSettingsController extends Controller
     public function updateInfo(Request $request)
     {
         $this->validate($request, [
-            'name'  => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'first_name'    => 'required|string|max:255',
+            'last_name'     => 'required|string|max:255',
+            'email'         => 'required|string|email|max:255|unique:users',
+            'postal_code'   => 'required|string|max:255',
+            'city'          => 'required|string',
+            'country'       => 'required|max:10|integer',
         ]);
+
+        $request->merge(['name' => "{$request->first_name} {$request->last_name}"]);
 
         if ($this->users->findOrFail(auth()->user()->id)->update($request->all())) {
             flash(trans('profile-settings.flash-info'))->success();

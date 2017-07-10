@@ -10,18 +10,6 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(ActivismeBE\User::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
-    ];
-});
 $factory->define(ActivismeBE\Categories::class, function (Faker\Generator $faker) {
     return [
         'module' => $faker->word,
@@ -109,6 +97,23 @@ $factory->define(ActivismeBE\Signatures::class, function (Faker\Generator $faker
         'city' => $faker->city,
         'name' => $faker->name,
         'email' => $faker->safeEmail,
+    ];
+});
+
+$factory->define(ActivismeBE\User::class, function (Faker\Generator $faker) {
+    return [
+        'country_id' => $faker->randomNumber(),
+        'twitter_id' => $faker->randomNumber(),
+        'facebook_id' => $faker->randomNumber(),
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'postal_code' => $faker->word,
+        'city' => $faker->city,
+        'name' => $faker->name,
+        'email' => $faker->safeEmail,
+        'password' => bcrypt($faker->password),
+        'remember_token' => str_random(10),
+        'banned_at' => $faker->dateTimeBetween(),
     ];
 });
 

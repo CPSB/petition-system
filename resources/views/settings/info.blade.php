@@ -4,7 +4,7 @@
     </div>
 
     <div class="panel-body">
-        <form action="" class="form-horizontal" method="post">
+        <form action="{{ route('settings.info') }}" class="form-horizontal" method="post">
             {{ csrf_field() }}
 
             <fieldset>
@@ -16,11 +16,11 @@
                     </label>
 
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="first_name" placeholder="Voornaam">
+                        <input type="text" class="form-control" name="first_name" value="{{ auth()->user()->first_name }}" placeholder="Voornaam">
                     </div>
 
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="last_name" placeholder="Achternaam">
+                        <input type="text" class="form-control" name="last_name" value="{{ auth()->user()->last_name }}" placeholder="Achternaam">
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     </label>
 
                     <div class="col-md-10">
-                        <input type="email" class="form-control" name="email" placeholder="Email adres">
+                        <input type="email" class="form-control" name="email" value="{{ auth()->user()->email }}" placeholder="Email adres">
                     </div>
                 </div>
             </fieldset>
@@ -44,11 +44,11 @@
                     </label>
 
                     <div class="col-md-3">
-                        <input type="text" class="form-control" placeholder="Postcode" name="postal_code">
+                        <input type="text" class="form-control" placeholder="Postcode" value="{{ auth()->user()->postal_code }}" name="postal_code">
                     </div>
 
                     <div class="col-md-7">
-                        <input type="text" class="form-control" placeholder="Uw stad" name="city">
+                        <input type="text" class="form-control" placeholder="Uw stad" value="{{ auth()->user()->city }}" name="city">
                     </div>
                 </div>
 
@@ -60,6 +60,10 @@
                     <div class="col-md-10">
                         <select class="form-control" name="country">
                             <option value="">-- Selecteer je land van woonst --</option>
+
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->long_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
