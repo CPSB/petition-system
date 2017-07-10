@@ -26,7 +26,7 @@ class RoleMiddleware
      * @param  string $permission
      * @return mixed
      */
-    public function handle($request, Closure $next, $role, $permission)
+    public function handle($request, Closure $next, $role, $permission = null)
     {
         if (Auth::guest()) {
             return back(302);
@@ -36,8 +36,10 @@ class RoleMiddleware
             return $next($request);
         }
 
-        if (auth()->user()->can($permission)) {
-           return $next($request);
+        if (! is_null($permission)) {
+            if (auth()->user()->can($permission)) {
+                return $next($request);
+            }
         }
 
         return abort(403);

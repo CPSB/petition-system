@@ -16,7 +16,9 @@ class CreatePetitionsTable extends Migration
         if (! Schema::hasTable('petitions')) {
             Schema::create('petitions', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('type');
                 $table->integer('author_id');
+                $table->integer('mailing_id')->default('0');
                 $table->text('image_path');
                 $table->string('title');
                 $table->string('total_signatures');
