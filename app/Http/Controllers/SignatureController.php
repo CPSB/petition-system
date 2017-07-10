@@ -64,7 +64,7 @@ class SignatureController extends Controller
         $database = $this->signature;
 
         if ($sign = $database->create($filter)) {
-            $database->find($input->petition)->petition()->attach($sign->id);
+            $database->find($sign->id)->petition()->attach($input->petition);
             flash('Wij hebben uw handtekeningen verwerkt.')->success();
         }
 

@@ -33,10 +33,13 @@ class CommentsController extends Controller
             $participators = $question->author()->distinct()->get(['id']);
 
             foreach ($participators as $participator) {
-                $participator->notify(new NewComment($input));
+                if ((int) $input->author_id !== auth()->user()->id) {
+                    $participator->notify(new NewComment($input));
+                }
             }
 
             flash('Uw reactie is opgeslagen');
+            return redirect()->route('helpdesk.show', ['id' => $input->question_id]);
         }
     }
 

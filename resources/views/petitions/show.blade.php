@@ -35,7 +35,9 @@
                             </button>
                         </div>
                     @else
-                        <span class="pull-right">Handtekeningen: <strong>0 / {{ $petition->total_signatures }}</strong></span>
+                        <span class="pull-right">Handtekeningen:
+                            <strong>{{ $petition->signatures()->count() }} / {{ $petition->total_signatures }}</strong>
+                        </span>
                     @endif
                 </div>
 

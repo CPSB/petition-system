@@ -54,7 +54,7 @@ Route::resource('signature', 'SignatureController');
 Route::resource('petitions', 'PetitionsController');
 Route::get('petitions/search/petition', 'PetitionsController@search')->name('petitions.search');
 
-Route::get('comments/store', 'CommentsController@store')->name('comments.store');
+Route::post('comments/store', 'CommentsController@store')->name('comments.store');
 Route::get('comments/delete/{questionId}', 'CommentsController@destroy')->name('comments.delete');
 
 Route::get('/mailing/petition/create', 'MailingPetitionController@create')->name('petition.mail.addresses');
