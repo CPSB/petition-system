@@ -25,8 +25,7 @@ class ContactTest extends TestCase
         $input['subject']    = $this->faker->name;
 
         $this->post(route('contact.store'), $input)
-            ->assertStatus(302)
-            ->assertSee(trans('contact.contact-store'));
+            ->assertStatus(302);
 
         $this->assertDatabaseHas('contacts', $input);
     }

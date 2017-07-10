@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        factory(Role::class)->create(['name' => 'Admin']);
+        factory(Role::class)->create(['name' => 'Admin', 'guard_name' => 'web']);
 
         $this->faker = Factory::create();
     }
