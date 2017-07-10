@@ -9,13 +9,20 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class NotificationsTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    use DatabaseMigrations, DatabaseTransactions;
+
+    public function testNotificationsOverviewAuth()
     {
-        $this->assertTrue(true);
+        $this->actingAs($this->user)
+            ->seeIsAuthenticatedAs($this->user)
+            ->get(route('notifications.index'))
+            ->assertStatus(200);
+    }
+
+    public function testNotificationsNoAuth()
+    {
+        $this->get(route('notifications.index'))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use ActivismeBE\Permission;
 use ActivismeBE\Role;
 use ActivismeBE\User;
 use Faker\Factory;
@@ -13,6 +14,7 @@ abstract class TestCase extends BaseTestCase
 
     protected $faker;
     protected $adminUser;
+    protected $user;
 
     public function setUp()
     {
@@ -22,6 +24,8 @@ abstract class TestCase extends BaseTestCase
         $role = factory(Role::class)->create(['name' => 'Admin', 'guard_name' => 'web']);
 
         $this->faker     = Factory::create();
+
+        $this->user      = $user;
         $this->adminUser = User::find($user->id)->assignRole($role->name);
     }
 }
