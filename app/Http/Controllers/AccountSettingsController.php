@@ -88,7 +88,7 @@ class AccountSettingsController extends Controller
     {
         $this->validate($request, ['password' => 'required|string|min:6|confirmed']);
 
-        if ($this->users->findOrFail(auth()->user()->id)->update(bcrypt($request->all()))) {
+        if ($this->users->findOrFail(auth()->user()->id)->update(['password' => bcrypt($request->password)])) {
             flash(trans('profile-settings.flash-password'))->success();
         }
 
