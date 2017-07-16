@@ -47,6 +47,24 @@
                     {!! $petition->text !!}
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="btn btn-block btn-social btn-twitter">
+                        <span class="fa fa-twitter"></span> Deel op Twitter
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-block btn-social btn-facebook">
+                        <span class="fa fa-twitter"></span> Deel op Facebook
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-block btn-social btn-google">
+                        <span class="fa fa-google"></span> Deel op Google+
+                    </a>
+                </div>
+            </div>
         </div> {{-- //Petition text --}}
 
         <div class="col-md-3"> {{-- Sidebar (Signature) --}}
