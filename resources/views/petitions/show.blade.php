@@ -50,17 +50,17 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <a class="btn btn-block btn-social btn-twitter">
+                    <a href="{{ $share['twitter'] }}" class="btn btn-block btn-social btn-twitter">
                         <span class="fa fa-twitter"></span> Deel op Twitter
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a class="btn btn-block btn-social btn-facebook">
+                    <a href="{{ $share['facebook'] }}" class="btn btn-block btn-social btn-facebook">
                         <span class="fa fa-twitter"></span> Deel op Facebook
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a class="btn btn-block btn-social btn-google">
+                    <a href="{{ $share['gplus'] }}" class="btn btn-block btn-social btn-google">
                         <span class="fa fa-google"></span> Deel op Google+
                     </a>
                 </div>

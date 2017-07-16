@@ -7,6 +7,7 @@ use ActivismeBE\Countries;
 use ActivismeBE\Http\Requests\PetitionValidator;
 use ActivismeBE\Tokens;
 use ActivismeBE\Petitions;
+use Share;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -144,7 +145,10 @@ class PetitionsController extends Controller
             $petition  = $this->petitions->findorFail($id);
             $countries = $this->countries->all();
 
-            return view('petitions.show', compact('petition', 'countries'));
+            $share = Share::load(route('petitions.show', $petition), $petition->title)
+                ->services('facebook', 'gplus', 'twitter');
+
+            return view('petitions.show', compact('petition', 'countries', 'share'));
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back(302);
         }
