@@ -175,6 +175,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cog\Ban\Providers\BanServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -246,6 +247,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 
