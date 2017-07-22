@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
                 $table->increments('id');
                 $table->string('module');
                 $table->string('name');
-                $table->text('description')->default('N/A');
+                $table->text('description');
                 $table->timestamps();
             });
         }
@@ -31,6 +31,7 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('categories');
     }
 }

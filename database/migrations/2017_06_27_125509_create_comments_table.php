@@ -15,18 +15,26 @@ class CreateCommentsTable extends Migration
     {
        if (! Schema::hasTable('comments')) {
            Schema::create('comments', function (Blueprint $table) {
-               $table->increments('id');
-               $table->integer('author_id');
-               $table->text('comment');
-               $table->timestamps();
+                $table->increments('id');
+               
+                $table->integer('author_id')->unsigned();
+                $table->foreign('author_id')->references('id')->on('users');
+
+                $table->text('comment');
+                $table->timestamps();
            });
        }
 
        if (! Schema::hasTable('comments_helpdesk')) {
            Schema::create('comments_helpdesk', function (Blueprint $table) {
                $table->increments('id');
-               $table->integer('helpdesk_id');
-               $table->integer('comments_id');
+               
+               $table->integer('helpdesk_id')->unsigned();
+               $table->foreign('helpdesk_id')->references('id')->on('helpdesks');
+
+               $table->integer('comments_id')->unsigned();
+               $table->foreign('comments_id')->references('id')->on('comments');
+               
                $table->timestamps();
            });
        }
@@ -39,6 +47,7 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('comments');
         Schema::dropIfexists('comments_helpdesk');
     }

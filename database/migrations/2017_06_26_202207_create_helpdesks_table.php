@@ -16,8 +16,13 @@ class CreateHelpdesksTable extends Migration
         if (! Schema::hasTable('helpdesks')) {
             Schema::create('helpdesks', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('category_id')->nullable();
-                $table->integer('author_id')->nullable();
+                
+                $table->integer('category_id')->unsigned();
+                $table->foreign('category_id')->references('id')->on('categories');        
+        
+                $table->integer('author_id')->unsigned();
+                $table->foreign('author_id')->references('id')->on('users');
+
                 $table->string('open')->nullable();
                 $table->string('publish')->nullable();
                 $table->string('title')->nullable();
@@ -34,6 +39,7 @@ class CreateHelpdesksTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('helpdesks');
     }
 }

@@ -30,6 +30,7 @@ class CreateTokensTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('tokens');
     }
 }

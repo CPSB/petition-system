@@ -17,8 +17,13 @@ class CreatePetitionsTable extends Migration
             Schema::create('petitions', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('type')->default('petition');
-                $table->integer('author_id');
-                $table->integer('mailing_id')->default('0');
+
+                $table->integer('author_id')->unsigned();
+                $table->foreign('author_id')->references('id')->on('users');
+
+                $table->integer('mailing_id')->unsigned();
+                $table->foreign('mailing_id')->references('id')->on('mailing_adresses');
+
                 $table->text('image_path');
                 $table->string('title');
                 $table->string('total_signatures');
@@ -44,6 +49,7 @@ class CreatePetitionsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('petitions');
         Schema::dropIfexists('categories_petitions');
     }

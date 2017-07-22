@@ -90,6 +90,7 @@ class CreatePermissionTables extends Migration
     {
         $tableNames = config('permission.table_names');
 
+        Schema::disableForeignKeyConstraints();
         Schema::drop($tableNames['role_has_permissions']);
         Schema::drop($tableNames['model_has_roles']);
         Schema::drop($tableNames['model_has_permissions']);

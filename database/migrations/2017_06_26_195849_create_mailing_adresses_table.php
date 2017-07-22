@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCountriesTable extends Migration
+class CreateMailingAdressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('countries')) {
-            Schema::create('countries', function (Blueprint $table) {
+        if (! Schema::hasTable('mailing_adresses')) {
+            Schema::create('mailing_adresses', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('short_name');
-                $table->string('long_name');
+                $table->string('email', 60);
                 $table->timestamps();
             });
         }
@@ -30,6 +29,7 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('mialing_adresses');
     }
 }

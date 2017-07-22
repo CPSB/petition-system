@@ -16,7 +16,10 @@ class CreateContactsTable extends Migration
         if (! Schema::hasTable('contacts')) {
             Schema::create('contacts', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('read_by')->nullable();
+                
+                $table->integer('read_by')->unsigned(); 
+                $table->foreign('read_by')->references('id')->on('users');
+                
                 $table->string('is_read')->default('N');
                 $table->string('first_name')->nullable();
                 $table->string('last_name')->nullable();
@@ -35,6 +38,7 @@ class CreateContactsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('contacts');
     }
 }

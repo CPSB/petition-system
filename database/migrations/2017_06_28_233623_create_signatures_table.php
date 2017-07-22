@@ -17,7 +17,10 @@ class CreateSignaturesTable extends Migration
             Schema::create('signatures', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('publish')->default('Y');
-                $table->integer('country_id');
+                
+                $table->integer('country_id')->unsigned();
+                $table->foreign('country_id')->references('id')->on('countries');
+
                 $table->integer('postal_code');
                 $table->string('city');
                 $table->string('name');
@@ -29,8 +32,13 @@ class CreateSignaturesTable extends Migration
         if (! Schema::hasTable('petitions_signatures')) {
             Schema::create('petitions_signatures', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('petitions_id');
-                $table->integer('signatures_id');
+
+                $table->integer('petitions_id')->unsigned();
+                $table->foreign('petitions_id')->references('id')->on('petitions');
+
+                $table->integer('signatures_id')->unsigned();
+                $table->foreign('signatures_id')->references('id')->on('signatures');
+                
                 $table->timestamps();
             });
         }
@@ -43,6 +51,7 @@ class CreateSignaturesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('signatures');
         Schema::dropIfExists('petitions_signatures');
     }

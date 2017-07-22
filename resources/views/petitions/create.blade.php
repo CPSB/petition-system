@@ -87,7 +87,7 @@
                             </label>
 
                             <div class="col-md-10">
-                                <textarea name="text" id="summernote">
+                                <textarea name="description" id="summernote">
                                     @if (! is_null(old('text'))) {{ old('text') }}
                                     @else <p><b>Zet hier je petitie tekst</b></p>
                                     @endif

@@ -46,8 +46,11 @@ class SocialAuthencation extends Controller
         } catch (Exception $exception) {
             return Redirect::to("auth/{$provider}");
         }
+        
+        $newUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($newUser, true);
 
-        Auth::login($this->findOrCreateUser($user, $provider), true);
+        $newUser->assignRole('User');
 
         return back(302);
     }
