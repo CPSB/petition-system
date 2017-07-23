@@ -11,14 +11,16 @@ class NewSupportQuestion extends Notification
 {
     use Queueable;
 
+    public $data;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -42,7 +44,7 @@ class NewSupportQuestion extends Notification
     {
         return [
             'message' => auth()->user()->name . " heeft een support vraag gesteld. ",
-            'url'     => '',
+            'url'     => route('helpdesk.show', $this->data->id),
             'author'  => auth()->user()->name,
         ];
     }

@@ -70,13 +70,13 @@ class HelpDeskController extends Controller
     {
         if ((int) auth()->user()->id == $input->author_id) {
             $input->merge(['open' => 'Y']);
-            $this->tickets->create($input->except('_token'));
+            $question = $this->tickets->create($input->except('_token'));
 
             // Notify the admins.
             $admins = $this->users->role('Admin')->get();
 
             foreach ($admins as $admin) {
-                $admin->notify(new NewSupportQuestion()); // Notify some admin.
+                $admin->notify(new NewSupportQuestion($question)); // Notify some admin.
             }
 
             flash('Wij hebben u vraag goed ontvangen. Wij antwoorden spoedig.');
