@@ -45,7 +45,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $share = Share::load(route('petitions.show', $petition), $petition->title)
+        $share = Share::load(url('/'))
                 ->services('facebook', 'twitter');
 
         return view('welcome', compact('share'));
