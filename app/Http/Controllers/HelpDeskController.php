@@ -40,6 +40,13 @@ class HelpDeskController extends Controller
      */
     public function index()
     {
+        if (auth()->check() && auth()->user()->hasRole('Admin')) {
+            // Check if the user is authencated. And has the admin role. 
+            // IF user has the admin role. Show the admin panel for the helpdesk. 
+            
+            return view('helpdesk.admin');
+        } 
+
         $all     = $this->tickets->count();
         $open    = $this->tickets->where('open', 'Y')->count();
         $closed  = '';
