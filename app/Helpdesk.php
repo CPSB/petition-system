@@ -16,7 +16,7 @@ class Helpdesk extends Model
      *
      * @var array
      */
-    protected $fillable = ['author_id', 'description', 'title', 'category_id', 'open'];
+    protected $fillable = ['author_id', 'publish', 'description', 'title', 'category_id', 'open'];
 
     /**
      * The question author relationship.
