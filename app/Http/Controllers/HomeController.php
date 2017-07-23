@@ -2,6 +2,7 @@
 
 namespace ActivismeBE\Http\Controllers;
 
+use Share;
 use ActivismeBE\Categories;
 use ActivismeBE\Petitions;
 use Illuminate\Http\Request;
@@ -44,7 +45,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $share = Share::load(route('petitions.show', $petition), $petition->title)
+                ->services('facebook', 'twitter');
+
+        return view('welcome', compact('share'));
     }
 
     /**

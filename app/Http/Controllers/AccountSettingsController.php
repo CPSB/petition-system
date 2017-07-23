@@ -57,7 +57,7 @@ class AccountSettingsController extends Controller
         if ($userId == auth()->user()->id) { // The user u want to display is the authencated user.
             return redirect()->route('settings.index');
         } else {
-            return view();
+            return view('auth.user-profile');
         }
     }
 

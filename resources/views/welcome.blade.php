@@ -12,10 +12,10 @@
                     Een petitie platform gedreven en onderhouden door een community.
                 </p>
              
-                <a href="" class="btn btn-default"><span class="fa fa-twitter" aria-hidden="true"></span> Twitter</a>
-                <a href="" class="btn btn-default"><span class="fa fa-facebook" aria-hidden="true"></span> Facebook</a>
-                <a href="" class="btn btn-default"><span class="fa fa-github" aria-hidden="true"></span> Github</a>
-                <a href="" class="btn btn-default"><span class="fa fa-envelope" aria-hidden="true"></span> Contact</a>
+                <a href="{{ $share['twitter'] }}" target="_blank" class="btn btn-default"><span class="fa fa-twitter" aria-hidden="true"></span> Twitter</a>
+                <a href="{{ $share['facebook'] }}" target="_blank" class="btn btn-default"><span class="fa fa-facebook" aria-hidden="true"></span> Facebook</a>
+                <a href="https://github.com/CPSB/petition-system" target="_blank" class="btn btn-default"><span class="fa fa-github" aria-hidden="true"></span> Github</a>
+                <a href="mailto:tom@activisme.be" class="btn btn-default"><span class="fa fa-envelope" aria-hidden="true"></span> Contact</a>
             </div>
         </div>
 
