@@ -40,16 +40,18 @@ class HelpDeskController extends Controller
      */
     public function index()
     {
+        $base = $this->tickets; 
+
         if (auth()->check() && auth()->user()->hasRole('Admin')) {
             // Check if the user is authencated. And has the admin role. 
             // IF user has the admin role. Show the admin panel for the helpdesk. 
             
-            return view('helpdesk.admin');
+            return view('helpdesk.admin', compact('base'));
         } 
 
-        $all     = $this->tickets->count();
-        $open    = $this->tickets->where('open', 'Y')->count();
-        $closed  = '';
+        $all     = $base->count();
+        $open    = $base->where('open', 'Y')->count();
+        $closed  = $base->where('open', 'N')->count();
 
         return view('helpdesk.index', compact('all', 'open', 'closed'));
     }
@@ -113,17 +115,6 @@ class HelpDeskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Get the helpdesk questions for a user.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -152,25 +143,35 @@ class HelpDeskController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the open status for a helpdesk ticket.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  integer $id The ticket id in the database.
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function openClose($id) 
     {
-        //
-    }
+        try { // To find the ticket in the database. 
+            $ticket = $this->tickets->findOrFail($id); 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id The helpdesk question id in the database.
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            switch ($ticket->open) {
+                case 'N': // The ticket is closed. So re-open it. 
+                    if ($ticket->update(['open' => 'Y'])) { // Ticket has the oipen status is the database.
+                        flash('Het ticket is heropend.')->success();
+                        return back(302);
+                    }
+
+                case 'Y': // The ticket is open. So close it. 
+                    if ($ticket->update(['open' => 'N'])) {
+                        flash('Het ticket is gesloten.')->success();
+                        return back(302); 
+                    }
+
+                default:
+                    flash('Wij konden het helpdesk ticket niet aanpassen.')->error();
+                    return back(302); 
+            }
+        } catch (ModelNotFoundException $exception) { // Oops ticket not found. 
+             return app()->abort(404); 
+        }
     }
 }

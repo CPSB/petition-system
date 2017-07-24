@@ -43,9 +43,9 @@
                                     <td><code>#Q{{ $question->id }}</code></td>
                                     <td>
                                         @if ((string) $question->open === 'Y') {{-- The question open --}}
-                                        <span class="label label-success">Open</span>
+                                            <span class="label label-success">Open</span>
                                         @else {{-- The question is closed --}}
-                                        <span class="label label-danger">Closed</span>
+                                            <span class="label label-danger">Closed</span>
                                         @endif
                                     </td>
                                     <td>{{ $question->categories->name }}</td>

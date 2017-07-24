@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function() {
  */
 Route::get('export/excel/{type}/{id}', 'ExportController@export')->name('export');
 
+Route::get('helpdesk/status/{id}', 'HelpdeskController@openClose')->name('helpdesk.status');
 Route::get('helpdesk/public', 'HelpdeskController@getPublic')->name('helpdesk.public');
 Route::get('helpdesk/user', 'HelpDeskController@getUser')->name('helpdesk.user');
 Route::resource('helpdesk', 'HelpDeskController');
