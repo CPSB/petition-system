@@ -37,8 +37,8 @@
                                          <td>{{ $result->comments()->count() }} reacties.</td>
                                          <td>{{ $result->title }}</td>
 
-                                         <td class=""> {{-- Options --}}
-                                            <a href="" class="btn btn-default btn-xs">
+                                         <td> {{-- Options --}}
+                                            <a href="{{ route('helpdesk.show', $result) }}" class="btn btn-default btn-xs">
                                                 <span class="fa fa-asterisk" aria-hidden="true"></span> Bekijk
                                             </a>
 
