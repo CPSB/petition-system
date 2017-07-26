@@ -21,7 +21,7 @@ class CreatePetitionsTable extends Migration
                 $table->integer('author_id')->unsigned();
                 $table->foreign('author_id')->references('id')->on('users');
 
-                $table->integer('mailing_id')->unsigned();
+                $table->integer('mailing_id')->unsigned()->nullable();
                 $table->foreign('mailing_id')->references('id')->on('mailing_adresses');
 
                 $table->text('image_path');

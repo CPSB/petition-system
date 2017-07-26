@@ -12,8 +12,6 @@
         </div> {{-- Petition heading --}}
 
         <div class="col-md-9"> {{-- Petition text --}}
-            <form action="{{ route('petitions.destroy', $petition) }}" method="POST" id="verwijder">{{ csrf_field() }} {{ method_field('DELETE') }}</form>
-
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     @if (auth()->check() && auth()->user()->id == $petition->author_id)
@@ -32,7 +30,7 @@
                                 <span class="fa fa-bars" aria-hidden="true"></span> Handtekeningen
                             </button>
 
-                            <button form="verwijder" type="submit" class="btn btn-xs btn-danger">
+                            <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#petitionDelete">
                                 <span class="fa fa-trash" aria-hidden="true"></span> Verwijder
                             </button>
                         </div>
@@ -140,4 +138,8 @@
             </div>
         </div> {{-- Sidebar (Signature) --}}
     </div>
+
+    @if (auth()->check() && auth()->user()->id == $petition->author_id)
+        @include('petitions.alert.delete')
+    @endif
 @endsection
