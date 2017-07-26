@@ -47,4 +47,14 @@ class Petitions extends Model
     {
         return $this->belongsToMany(Signatures::class)->withTimestamps();
     }
+
+    /**
+     * Mailing petition data relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function mailing()
+    {
+        return $this->belongsTo(MailingAdresses::class, 'mailing_id');
+    }
 }

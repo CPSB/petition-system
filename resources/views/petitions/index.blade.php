@@ -16,7 +16,14 @@
                             <div style="margin-left: -15px;" class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h4><strong><a href="{{ route('petitions.show', $petition) }}">{{ $petition->title }}</a></strong></h4>
+                                        <h4>
+                                            <strong>
+                                                <a href="{{ route('petitions.show', $petition) }}">
+                                                    @if ($petition->type === 'mailing') [Mailing]: @endif
+                                                    {{ $petition->title }}
+                                                </a>
+                                            </strong>
+                                        </h4>
                                     </div>
                                 </div>
 

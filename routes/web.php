@@ -59,3 +59,4 @@ Route::post('comments/store', 'CommentsController@store')->name('comments.store'
 Route::get('comments/delete/{questionId}', 'CommentsController@destroy')->name('comments.delete');
 
 Route::get('/mailing/petition/create', 'MailingPetitionController@create')->name('petition.mail.addresses');
+Route::post('/mailing/petition/store', 'MailingPetitionController@store')->name('petition.mail.store');
