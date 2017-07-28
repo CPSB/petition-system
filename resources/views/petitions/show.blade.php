@@ -136,6 +136,11 @@
                     </button>
                 </div>
             </div>
+
+            <small class="text-muted">
+                Bij het tekenen gaat u akkoord met de
+                <a href="">algemene voorwaarden</a>.
+            </small>
         </div> {{-- Sidebar (Signature) --}}
     </div>
 

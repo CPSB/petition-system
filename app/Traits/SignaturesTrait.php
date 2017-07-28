@@ -31,7 +31,6 @@ trait SignaturesTrait
             if ((int) count($signatures) > 0) { // De petitie heeft meer dan 0 handtekeningen
                 Excel::create("{$timestamp}-Handtekeningen", function ($excel) use ($signatures) {
                     $excel->sheet('Handtekeningen', function ($sheet) use ($signatures) {
-                        // TODO: het opbouwen van de view. Omdat deze momenteel nog leeg is.
                         $sheet->loadView('signatures.export', compact('signatures'));
                     });
                 })->export($type); // Can only be 'xls' or 'pdf'
