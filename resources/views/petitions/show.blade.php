@@ -139,7 +139,7 @@
 
             <small class="text-muted">
                 Bij het tekenen gaat u akkoord met de
-                <a href="">algemene voorwaarden</a>.
+                <a href="#" data-toggle="modal" data-target="#voorwaarden">algemene voorwaarden</a>.
             </small>
         </div> {{-- Sidebar (Signature) --}}
     </div>
@@ -147,4 +147,6 @@
     @if (auth()->check() && auth()->user()->id == $petition->author_id)
         @include('petitions.alert.delete')
     @endif
+
+    @include('petitions.agreement')
 @endsection
