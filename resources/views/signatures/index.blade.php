@@ -19,7 +19,7 @@
                     @if ($petition->signatures()->count() > 0)
                         <div class="pull-right">
                             <a href="{{ route('export', ['type' => 'xls', 'id' => $petition->id]) }}" class="label label-success">Exporteer (XLS)</a>
-                            {{-- <a href="{{ route('export', ['type' => 'pdf', 'id' => $petition->id]) }}" class="label label-success">Exporteer (PDF)</a> --}}
+                            <a href="{{ route('export', ['type' => 'pdf', 'id' => $petition->id]) }}" class="label label-success">Exporteer (PDF)</a>
                         </div>
                     @endif
                 </div> {{-- Panel heading --}}
