@@ -46,7 +46,7 @@
                             </li>
 
                             @if (Auth::check())
-                                @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                                @if (auth()->user()->hasRole('Admin'))
                                      <li class="dropdown">
                                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                             <span class="fa fa-asterisk" aria-hidden="true"></span> Logins <span class="caret"></span>
